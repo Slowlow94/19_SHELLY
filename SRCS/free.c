@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_env.c                                     :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 12:03:32 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/01 16:13:40 by salowie          ###   ########.fr       */
+/*   Created: 2023/11/02 12:25:40 by salowie           #+#    #+#             */
+/*   Updated: 2023/11/02 12:25:55 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCS/s_minishell.h"
 
-
-int	ft_envp(char **my_envp, char **argv, int i)
+void	free_double_tab_char(char **str, int nbr_cmd)
 {
-	int	j;
+	int	i;
 
-	j = 0;
-	if (argv[i + 1])
-		return (printf("%s: No such file or directory\n", argv[i + 1]));
-	while (my_envp[j])
-		printf("%s\n", my_envp[j++]);
-	return (0);
+	i = 0;
+	if (!str)
+		return ;
+	while (i < nbr_cmd - 1 && str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
