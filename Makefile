@@ -10,6 +10,7 @@ SRCS	= libft/ft_atoi.c \
 		libft/ft_memchr.c \
 		libft/ft_memcmp.c \
 		libft/ft_memcpy.c \
+		libft/ft_memccpy.c \
 		libft/ft_memmove.c \
 		libft/ft_memset.c \
 		libft/ft_strchr.c \
@@ -17,6 +18,7 @@ SRCS	= libft/ft_atoi.c \
 		libft/ft_strlcat.c \
 		libft/ft_strlcpy.c \
 		libft/ft_strlen.c \
+		libft/ft_strcmp.c \
 		libft/ft_strncmp.c \
 		libft/ft_strnstr.c \
 		libft/ft_strrchr.c \
@@ -29,6 +31,7 @@ SRCS	= libft/ft_atoi.c \
 		libft/ft_itoa.c \
 		libft/ft_strmapi.c \
 		libft/ft_striteri.c \
+		libft/ft_putchar.c \
 		libft/ft_putchar_fd.c \
 		libft/ft_putstr_fd.c \
 		libft/ft_putendl_fd.c \
@@ -42,14 +45,20 @@ SRCS	= libft/ft_atoi.c \
 		libft/ft_lstclear_bonus.c \
 		libft/ft_lstiter_bonus.c \
 		libft/ft_lstmap_bonus.c \
+		libft/ft_printf.c \
+		libft/ft_printf_2.c \
+		libft/get_next_line.c \
+		libft/get_next_line_utils.c \
 		SRCS/s_main.c \
 		SRCS/builtins_echo.c \
+		SRCS/builtins_echo_2.c \
 		SRCS/builtins_cd.c \
 		SRCS/builtins_pwd.c \
 		SRCS/builtins_export.c \
 		SRCS/builtins_unset.c \
 		SRCS/builtins_env.c \
-		SRCS/builtins_exit.c
+		SRCS/builtins_exit.c \
+		SRCS/free.c
 
 OBJS	= ${SRCS:.c=.o}
 INCS	= -IINCS

@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:04:05 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/03 18:51:42 by salowie          ###   ########.fr       */
+/*   Updated: 2023/11/06 10:55:22 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static int	is_in_new_str(char *str_envp, char **env_in_order)
 	i = 0;
 	while (env_in_order[i])
 	{
-		if (ft_strncmp(str_envp, "_=", 2) == 0)
-			return (1);
+		// if (ft_strncmp(str_envp, "_=", 2) == 0)
+		// 	return (1);
 		if (ft_strcmp(env_in_order[i], str_envp) == 0)
 			return (1);
 		i++;
@@ -48,34 +48,33 @@ static int	is_in_new_str(char *str_envp, char **env_in_order)
 	return (0);
 }
 
-static size_t	cpy_quote(char *dst, const char *src, size_t size)
+static char	*cpy_quote(char *str_env, int size)
 {
 	size_t	i;
 	size_t	j;
 	int		flag;
+	char	*tmp;
 
 	i = 0;
 	j = 0;
 	flag = 0;
-	if (!src)
-		return (0);
-	if (size != 0)
+	tmp = malloc(sizeof(char) * size);
+	if (!tmp)
+		return (NULL);
+	while (str_env[i])
 	{
-		while (src[i] && j < size -2)
+		if (str_env[i] == '=' && flag == 0)
 		{
-			if (src[i] == '=' && (j + 1 < size - 2) && flag == 0)
-			{
-				dst[j++] = src[i++];
-				dst[j++] = '"';
-				flag = 1;
-			}
-			else
-				dst[j++] = src[i++];
+			tmp[j++] = str_env[i++];
+			tmp[j++] = '"';
+			flag = 1;
 		}
-		dst[j++] = '"';
-		dst[j] = '\0';
+		else
+			tmp[j++] = str_env[i++];
 	}
-	return (ft_strlen(src));
+	tmp[j++] = '"';
+	tmp[j] = '\0';
+	return (tmp);
 }
 
 static void	put_in_str_in_order(char ***env_in_order, char *first_to_write, int nbr_variables)
@@ -84,19 +83,15 @@ static void	put_in_str_in_order(char ***env_in_order, char *first_to_write, int 
 
 	i = 0;
 	while ((*env_in_order)[i])
-	{
-		printf("ligne %d : %s\n", i, (*env_in_order)[i]);
 		i++;
-	}
-	(*env_in_order)[i] = malloc(sizeof(char) * (ft_strlen(first_to_write) + 3));
+	(*env_in_order)[i] = malloc(sizeof(char) * (ft_strlen(first_to_write) + 1));
 	if (!(*env_in_order)[i])
 	{
 		perror ("malloc");
 		return;
 	}
-	// ft_strlcpy((*env_in_order)[i], first_to_write, ft_strlen(first_to_write) + 1);
-	cpy_quote((*env_in_order)[i], first_to_write, ft_strlen(first_to_write) + 3);
-	if (nbr_variables > 0) // remettre = ?
+	ft_strlcpy((*env_in_order)[i], first_to_write, ft_strlen(first_to_write) + 1);
+	if (nbr_variables >= 0) // remettre = ?
 		(*env_in_order)[i + 1] = NULL;
 }
 
@@ -124,7 +119,6 @@ static char	**sorted_by_alpha(char **envp, int nbr_variables)
 			}
 			i++;
 		}
-		printf("first to write : %s\n", first_to_write);
 		if (first_to_write)
 			put_in_str_in_order(&env_in_order, first_to_write, nbr_variables);
 		nbr_variables--;
@@ -137,14 +131,17 @@ static int	export_without_cmd(char **envp)
 	int	i;
 	int	nbr_variables;
 	char **env_in_order;
+	char *result;
 
 	i = 0;
 	nbr_variables = nbr_variables_envp(envp);
 	env_in_order = sorted_by_alpha(envp, nbr_variables);
 	while (env_in_order[i])
 	{
+		result = cpy_quote((env_in_order[i]), ft_strlen(env_in_order[i]) + 3);
 		printf("declare -x ");
-		printf("%s\n", env_in_order[i]);
+		printf("%s\n", result);
+		free(result);
 		i++;
 	}
 	free_double_tab_char(env_in_order, nbr_variables);
