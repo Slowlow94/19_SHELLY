@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_env.c                                     :+:      :+:    :+:   */
+/*   initialisation_structure.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 12:03:32 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/07 18:19:06 by salowie          ###   ########.fr       */
+/*   Created: 2023/11/07 15:28:42 by salowie           #+#    #+#             */
+/*   Updated: 2023/11/07 17:57:58 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCS/s_minishell.h"
 
-int	ft_envp(char **my_envp, char **argv, int i)
+char	**create_my_envp(char **envp)
 {
-	int	j;
+	int		i;
+	int		j;
+	int		nbr_variables;
+	char	**my_envp;
 
+	i = 0;
 	j = 0;
-	if (argv[i + 1])
-		return (printf("%s: No such file or directory\n", argv[i + 1]));
-	while (my_envp[j])
-		printf("%s\n", my_envp[j++]);
-	return (0);
+	nbr_variables = nbr_variables_envp(envp);
+	my_envp = malloc(sizeof(char *) * (nbr_variables + 1));
+	if (!my_envp)
+		return (NULL);
+	while (envp[i])
+	{
+		my_envp[i] = ft_strdup(envp[i]);
+		i++;
+	}
+	my_envp[i] = NULL;
+	return (my_envp);
 }

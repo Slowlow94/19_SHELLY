@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:03:07 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/01 11:43:48 by salowie          ###   ########.fr       */
+/*   Updated: 2023/11/07 18:20:06 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	is_nnn(char **str, int i)
 {
 	int	j;
+
 	if (!str[i])
 		return (1);
 	if (ft_strncmp(str[i], "-n", 2) == 0)
@@ -32,7 +33,7 @@ static int	is_nnn(char **str, int i)
 	return (1);
 }
 
-static int is_more_n(char **str, int i)
+static int	is_more_n(char **str, int i)
 {
 	if (!str[i])
 		return (1);
@@ -79,7 +80,8 @@ int	ft_echo(char **str, int i)
 	{
 		if (is_nnn(str, i) == 1)
 			echo_with_n(str, i);
-		else if ((ft_strncmp(str[i], "-n", 3) == 0) && (is_more_n(str, i + 1) == 0))
+		else if ((ft_strncmp(str[i], "-n", 3) == 0) 
+			&& (is_more_n(str, i + 1) == 0))
 			echo_with_no_n(str, i);
 		else if (is_nnn(str, i) == 0 || ft_strncmp(str[i], "-n", 3) == 0)
 			echo_with_no_n(str, i);

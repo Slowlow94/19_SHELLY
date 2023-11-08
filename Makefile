@@ -50,14 +50,18 @@ SRCS	= libft/ft_atoi.c \
 		libft/get_next_line.c \
 		libft/get_next_line_utils.c \
 		SRCS/s_main.c \
+		SRCS/builtins_utils.c \
 		SRCS/builtins_echo.c \
 		SRCS/builtins_echo_2.c \
 		SRCS/builtins_cd.c \
 		SRCS/builtins_pwd.c \
 		SRCS/builtins_export.c \
+		SRCS/builtins_export_2.c \
+		SRCS/builtins_export_without_arg.c \
 		SRCS/builtins_unset.c \
 		SRCS/builtins_env.c \
 		SRCS/builtins_exit.c \
+		SRCS/initialisation_structure.c \
 		SRCS/free.c
 
 OBJS	= ${SRCS:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:35:40 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/02 10:38:14 by salowie          ###   ########.fr       */
+/*   Updated: 2023/11/07 18:23:24 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_exit(char *argv)
 		}
 		i++;
 	}
-	value = ft_atoi(argv);	
+	value = ft_atoi(argv);
 	if (value == 0)
 		return (0);
 	return (1);
