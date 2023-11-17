@@ -6,11 +6,11 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:51:38 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/07 18:15:29 by salowie          ###   ########.fr       */
+/*   Updated: 2023/11/16 12:21:21 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCS/s_minishell.h"
+#include "../../INCS/minishell.h"
 
 int	is_var_exists(char **envp, char *var)
 {
@@ -19,8 +19,8 @@ int	is_var_exists(char **envp, char *var)
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_strncmp(envp[i], var, until_plus(var, '+')) == 0 
-			|| ft_strncmp(envp[i], var, until_plus(var, '=')) == 0)
+		if (ft_strncmp(envp[i], var, until(var, '=') + 1) == 0 
+			|| ft_strncmp(envp[i], var, until(var, '+')) == 0)
 			return (1);
 		i++;
 	}
@@ -40,7 +40,7 @@ int	ft_strlen_from(char *str, int i)
 	return (j);
 }
 
-int	until_plus(char *var, char c)
+int	until(char *var, char c)
 {
 	int	i;
 
@@ -53,8 +53,10 @@ int	until_plus(char *var, char c)
 void	ft_strlcpy_whithout_plus(char *dst, char *src, int size)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	if (!src)
 		return ;
 	if (size != 0)
@@ -63,10 +65,11 @@ void	ft_strlcpy_whithout_plus(char *dst, char *src, int size)
 		{
 			if (src[i] == '+')
 				i++;
-			dst[i] = src[i];
+			dst[j] = src[i];
 			i++;
+			j++;
 		}
-		dst[i] = '\0';
+		dst[j] = '\0';
 	}
 }
 
@@ -76,7 +79,7 @@ void	cpy_for_add_var(char *dst, char *src_add, char *src, int size)
 	int	index_from_src_add;
 
 	i = 0;
-	index_from_src_add = until_plus(src_add, '+') + 2;
+	index_from_src_add = until(src_add, '+') + 2;
 	while (src[i])
 	{
 		dst[i] = src[i];

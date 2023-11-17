@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_exit.c                                    :+:      :+:    :+:   */
+/*   builtins_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:35:40 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/07 18:23:24 by salowie          ###   ########.fr       */
+/*   Created: 2023/10/30 12:03:32 by salowie           #+#    #+#             */
+/*   Updated: 2023/11/16 17:40:33 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCS/s_minishell.h"
+#include "../../INCS/minishell.h"
 
-int	ft_exit(char *argv)
+int	ft_envp(char **argv, int i)
 {
-	int	value;
-	int	i;
+	int	j;
 
-	printf("exit\n");	
-	if (!argv)
-		return (0);
-	i = 0;
-	while (argv[i])
-	{
-		if (ft_isalpha(argv[i]) == 1)
-		{
-			printf("exit: %s: numeric argument required\n", argv);
-			return (1);
-		}
-		i++;
-	}
-	value = ft_atoi(argv);
-	if (value == 0)
-		return (0);
-	return (1);
+	j = 0;
+	if (argv[i + 1])
+		return (printf("%s: No such file or directory\n", argv[i + 1]));
+	if (!g_shell.my_envp)
+		g_shell.my_envp = NULL;
+	while (g_shell.my_envp[j])
+		printf("%s\n", g_shell.my_envp[j++]);
+	return (0);
 }

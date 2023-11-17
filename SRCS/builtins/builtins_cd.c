@@ -6,11 +6,11 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:02:33 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/02 11:35:58 by salowie          ###   ########.fr       */
+/*   Updated: 2023/11/16 13:32:08 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCS/s_minishell.h"
+#include "../../INCS/minishell.h"
 
 int	ft_cd(char *path)
 {
@@ -34,8 +34,6 @@ int	ft_cd(char *path)
 	{
 		if (getcwd(dir, sizeof(dir)) == NULL)
 			perror ("cd");
-		else
-			printf("The selected directory is: %s\n", dir); // test
 		return (0);
 	}
 	else

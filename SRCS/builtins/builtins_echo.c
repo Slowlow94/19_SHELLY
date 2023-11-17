@@ -6,11 +6,11 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:03:07 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/07 18:20:06 by salowie          ###   ########.fr       */
+/*   Updated: 2023/11/14 11:08:12 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCS/s_minishell.h"
+#include "../../INCS/minishell.h"
 
 static int	is_nnn(char **str, int i)
 {

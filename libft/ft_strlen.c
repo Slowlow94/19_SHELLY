@@ -6,11 +6,12 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:56:16 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/10/30 14:24:01 by salowie          ###   ########.fr       */
+/*   Updated: 2023/11/07 18:23:41 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 size_t	ft_strlen(const char *s)
 {

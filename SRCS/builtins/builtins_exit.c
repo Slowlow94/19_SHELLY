@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_env.c                                     :+:      :+:    :+:   */
+/*   builtins_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 12:03:32 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/07 18:19:06 by salowie          ###   ########.fr       */
+/*   Created: 2023/11/01 16:35:40 by salowie           #+#    #+#             */
+/*   Updated: 2023/11/16 16:14:30 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCS/s_minishell.h"
+#include "../../INCS/minishell.h"
 
-int	ft_envp(char **my_envp, char **argv, int i)
+int	ft_exit(char *argv)
 {
-	int	j;
+	int	value;
+	int	i;
 
-	j = 0;
-	if (argv[i + 1])
-		return (printf("%s: No such file or directory\n", argv[i + 1]));
-	while (my_envp[j])
-		printf("%s\n", my_envp[j++]);
-	return (0);
+	printf("exit\n");
+	if (!argv)
+		return (0);
+	i = 0;
+	while (argv[i])
+	{
+		if (ft_isalpha(argv[i]) == 1)
+		{
+			printf("exit: %s: numeric argument required\n", argv);
+			return (1);
+		}
+		i++;
+	}
+	value = ft_atoi(argv);
+	if (value == 0)
+		return (0);
+	return (1);
 }
+// free double tab dans structure + tout ce qui est alloue !!!!
