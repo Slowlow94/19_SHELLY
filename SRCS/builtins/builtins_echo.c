@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:03:07 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/14 11:08:12 by salowie          ###   ########.fr       */
+/*   Updated: 2023/12/27 13:03:19 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,7 @@ static int	is_nnn(char **str, int i)
 	return (1);
 }
 
-static int	is_more_n(char **str, int i)
-{
-	if (!str[i])
-		return (1);
-	while (str[i])
-	{
-		if (ft_strncmp(str[i], "-n", 3) == 0)
-			i++;
-		else
-			return (1);
-	}
-	return (0);
-}
-
-static void	echo_with_no_n(char **str, int i)
-{
-	if (is_nnn(str, i) == 0 || ft_strncmp(str[i], "-n", 3) == 0)
-	{
-		while (str[++i])
-		{
-			if (str[i + 1] == NULL && (!(ft_strncmp(str[i], "-n", 3) == 0)))
-				printf("%s", str[i]);
-			else if (!(ft_strncmp(str[i], "-n", 3) == 0))
-				printf("%s ", str[i]);
-		}
-	}
-}
-
-static void	echo_with_n(char **str, int i)
+static void	print_echo(char **str, int i, int n)
 {
 	while (str[i])
 	{
@@ -71,22 +43,28 @@ static void	echo_with_n(char **str, int i)
 			printf("%s ", str[i]);
 		i++;
 	}
-	printf("\n");
+	if (n == 0)
+		printf("\n");
 }
 
 int	ft_echo(char **str, int i)
 {
-	if (str[i])
+	int	n;
+
+	n = 0;
+	if (!str[i])
+		print_echo(str, i, 0);
+	while (str[i])
 	{
-		if (is_nnn(str, i) == 1)
-			echo_with_n(str, i);
-		else if ((ft_strncmp(str[i], "-n", 3) == 0) 
-			&& (is_more_n(str, i + 1) == 0))
-			echo_with_no_n(str, i);
-		else if (is_nnn(str, i) == 0 || ft_strncmp(str[i], "-n", 3) == 0)
-			echo_with_no_n(str, i);
+		if (is_nnn(str, i) == 0)
+			n = 1;
+		else if (ft_strncmp(str[i], "-n", 3) == 0)
+			n = 1;
+		else
+			break ;
+		i++;
 	}
-	else
-		echo_with_n(str, i);
+	if (str[i])
+		print_echo(str, i, n);
 	return (0);
 }

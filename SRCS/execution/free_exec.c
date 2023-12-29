@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_2d_char.c                                  :+:      :+:    :+:   */
+/*   free_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 10:01:39 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/19 15:06:43 by gvardaki         ###   ########.fr       */
+/*   Created: 2023/12/06 11:09:26 by salowie           #+#    #+#             */
+/*   Updated: 2023/12/26 15:26:45 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../INCS/minishell.h"
 
-char	**ft_free_2d(char **str)
+void	ft_error_free_and_close(t_shell *shell, char *str)
 {
-	int	i;
+	perror(str);
+	ft_free_all(shell);
+	exit (1);
+}
 
-	i = 0;
-	if (!str)
-		return (NULL);
-	while (str && str[i])
+void	free_rev_double_tab(t_pipe *pipex, int i)
+{
+	if (!pipex->fd)
+		return ;
+	while (i >= 0)
 	{
-		free(str[i]);
-		str[i] = NULL;
-		i++;
+		ft_free((void **)&pipex->fd[i]);
+		i--;
 	}
-	free(str);
-	str = NULL;
-	return (str);
+	ft_free((void **)&pipex->fd);
 }

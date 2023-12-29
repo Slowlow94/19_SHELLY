@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:29:39 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/11/13 11:54:17 by salowie          ###   ########.fr       */
+/*   Updated: 2023/12/19 15:09:01 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 typedef struct s_list
 {
 	void			*content;
+	char			pipe;
 	struct s_list	*next;
 }	t_list;
 
@@ -98,6 +99,6 @@ char	*ft_g_read(int fd, char *stake);
 char	*ft_g_join(char *stake, char *buff);
 char	*ft_g_line(char *stake);
 char	*ft_g_next(char *stake);
-void    ft_free_2d_char(char **str, int nbr_cmd);
+char	**ft_free_2d(char **str);
 
 #endif

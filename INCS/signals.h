@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_2d_char.c                                  :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gvardaki <gvardaki@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 10:01:39 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/19 15:06:43 by gvardaki         ###   ########.fr       */
+/*   Created: 2023/12/04 13:26:19 by gvardaki          #+#    #+#             */
+/*   Updated: 2023/12/28 13:04:52 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SIGNALS_H
+# define SIGNALS_H
 
-char	**ft_free_2d(char **str)
-{
-	int	i;
+# include <stdio.h>
 
-	i = 0;
-	if (!str)
-		return (NULL);
-	while (str && str[i])
-	{
-		free(str[i]);
-		str[i] = NULL;
-		i++;
-	}
-	free(str);
-	str = NULL;
-	return (str);
-}
+void	ft_signal(void);
+void	ft_int_handler(int num);
+void	ft_quit_handler(int num);
+void	ft_sigint_hd(int num);
+void	ft_sigint_hdc(int num);
+#endif

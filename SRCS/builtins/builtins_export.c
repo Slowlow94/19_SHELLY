@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:04:05 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/17 12:04:34 by salowie          ###   ########.fr       */
+/*   Updated: 2023/12/28 10:05:05 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static int	ft_is_plus_equal(char *var, int nbr_var)
 {
-	if (is_var_exists(g_shell.my_envp, var) == 1)
+	if (is_var_exists(g_shell.my_env, var) == 1)
 	{
-		g_shell.my_envp = add_to_var_in_env(g_shell.my_envp, var);
-		if (!g_shell.my_envp)
+		g_shell.my_env = add_to_var_in_env(g_shell.my_env, var);
+		if (!g_shell.my_env)
 			return (1);
 	}
-	if (is_var_exists(g_shell.my_envp, var) == 0)
+	if (is_var_exists(g_shell.my_env, var) == 0)
 	{
-		g_shell.my_envp = add_new_to_env(g_shell.my_envp, var, nbr_var);
-		if (!g_shell.my_envp)
+		g_shell.my_env = add_new_to_env(g_shell.my_env, var, nbr_var);
+		if (!g_shell.my_env)
 			return (1);
 	}
 	if (is_already_in_export(g_shell.export, var) == 1)
@@ -37,16 +37,16 @@ static int	ft_is_plus_equal(char *var, int nbr_var)
 
 static int	ft_is_equal(char *var, int nbr_var)
 {
-	if (is_var_exists(g_shell.my_envp, var) == 1)
+	if (is_var_exists(g_shell.my_env, var) == 1)
 	{
-		g_shell.my_envp = replace_var_in_env(var);
-		if (!g_shell.my_envp)
+		g_shell.my_env = replace_var_in_env(var);
+		if (!g_shell.my_env)
 			return (1);
 	}
-	if (is_var_exists(g_shell.my_envp, var) == 0)
+	if (is_var_exists(g_shell.my_env, var) == 0)
 	{
-		g_shell.my_envp = add_new_to_env(g_shell.my_envp, var, nbr_var);
-		if (!g_shell.my_envp)
+		g_shell.my_env = add_new_to_env(g_shell.my_env, var, nbr_var);
+		if (!g_shell.my_env)
 			return (1);
 	}
 	if (is_already_in_export(g_shell.export, var) == 1)
@@ -66,10 +66,13 @@ static int	what_to_do_for_var(char *var, int nbr_var)
 			return (1);
 	}
 	if (is_char(var, '=') == 1)
-		ft_is_equal(var, nbr_var);
+	{
+		if (ft_is_equal(var, nbr_var) == 0)
+			return (1);
+	}
 	else
 	{
-		if (is_non_var_in_env(g_shell.my_envp, var) == 0)
+		if (is_non_var_in_env(g_shell.my_env, var) == 0)
 		{
 			g_shell.export = add_var_to_export(var);
 			if (!g_shell.export)
@@ -83,11 +86,11 @@ int	ft_export(char **var, int i)
 {
 	int	nbr_variables;
 
-	nbr_variables = ft_strlen_double_tab(g_shell.my_envp);
+	nbr_variables = ft_strlen_double_tab(g_shell.my_env);
 	if (var[i] == NULL)
 	{
 		if (export_without_cmd(nbr_variables) == 1)
-			return (1); // msg d'error comme celui ci dessous ?
+			return (1);
 	}
 	while (var[i])
 	{
@@ -97,7 +100,10 @@ int	ft_export(char **var, int i)
 				return (1);
 		}
 		else
+		{
 			printf(" export: '%s' : not a valid identifier\n", var[i]);
+			return (1);
+		}
 		i++;
 	}
 	return (0);

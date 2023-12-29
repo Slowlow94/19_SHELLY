@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_2d_char.c                                  :+:      :+:    :+:   */
+/*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gvardaki <gvardaki@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 10:01:39 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/19 15:06:43 by gvardaki         ###   ########.fr       */
+/*   Created: 2023/12/20 13:27:57 by gvardaki          #+#    #+#             */
+/*   Updated: 2023/12/26 11:52:25 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../INCS/minishell.h"
 
-char	**ft_free_2d(char **str)
+int	ft_split_util(t_list **lst, char **ret)
 {
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (NULL);
-	while (str && str[i])
+	if ((*lst)->pipe)
 	{
-		free(str[i]);
-		str[i] = NULL;
-		i++;
+		*lst = (*lst)->next;
+		return (2);
 	}
-	free(str);
-	str = NULL;
-	return (str);
+	*ret = ft_build_cmd(*ret, *lst);
+	if (!*ret)
+		return (1);
+	*lst = (*lst)->next;
+	return (0);
 }

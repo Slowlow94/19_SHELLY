@@ -1,5 +1,7 @@
 NAME = minishell
 
+USR = ${USER}
+
 LIBFT_PATH = ./libft
 
 LIBFT = $(LIBFT_PATH)/libft.a
@@ -19,28 +21,50 @@ SRCS	= SRCS/builtins/exec_builtins.c \
 		SRCS/builtins/builtins_env.c \
 		SRCS/builtins/builtins_exit.c \
 		SRCS/builtins/actions_in_env.c \
-		SRCS/builtins/free.c \
+		SRCS/builtins/free_builtins.c \
 		SRCS/initialisation_structure.c \
+		SRCS/parsing/analyzer.c \
 		SRCS/parsing/add_node.c \
 		SRCS/parsing/parse_utils.c \
 		SRCS/parsing/parser.c \
 		SRCS/parsing/tokenizer.c \
-		SRCS/main.c
+		SRCS/parsing/var_env_utils.c \
+		SRCS/parsing/value_utils.c \
+		SRCS/parsing/here_doc.c \
+		SRCS/parsing/split_utils.c \
+		SRCS/parsing/expand_utils.c \
+		SRCS/parsing/ft_expand.c \
+		SRCS/signal/signal.c \
+		SRCS/execution/process.c \
+		SRCS/execution/child_process.c \
+		SRCS/execution/parent_process.c \
+		SRCS/execution/handle_cmds_redirections.c \
+		SRCS/execution/linked_list.c \
+		SRCS/execution/linked_list_2.c \
+		SRCS/execution/parsing_path_pipe.c \
+		SRCS/execution/parsing_relative_absolut.c \
+		SRCS/execution/no_pipe.c \
+		SRCS/execution/free.c \
+		SRCS/execution/free_exec.c \
+		SRCS/main.c \
+		SRCS/utils.c \
+		SRCS/parsing/ft_split_quote.c \
+		SRCS/ft_argv_cmd.c
 
-CC = gcc
+CC = cc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
 
-INCS = -L $(LIBFT_PATH) -lft
-
+INCS = -L $(LIBFT_PATH) -lft -lreadline -lhistory
 $(NAME) : $(OBJS)
 	make bonus -C $(LIBFT_PATH)
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME) $(INCS) -lreadline
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME) $(INCS) -L /Users/$(USR)/.brew/opt/readline/lib
 
 $(OBJS): $(SRC_DIR)%.o : $(SRC_DIR)%.c
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@ -I /Users/$(USR)/.brew/opt/readline/include
+
 
 all: $(NAME)
 

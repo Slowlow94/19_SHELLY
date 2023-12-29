@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:51:38 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/16 12:21:21 by salowie          ###   ########.fr       */
+/*   Updated: 2023/12/20 17:53:04 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,25 @@ void	ft_strlcpy_whithout_plus(char *dst, char *src, int size)
 {
 	int	i;
 	int	j;
+	int	flag;
 
 	i = 0;
 	j = 0;
+	flag = 0;
 	if (!src)
 		return ;
 	if (size != 0)
 	{
-		while (src[i] && i < size -1)
+		while (src[i] && i < (size - 1))
 		{
-			if (src[i] == '+')
+			if (src[i] == '=')
+				flag = 1;
+			if (flag == 0 && src[i] == '+')
 				i++;
-			dst[j] = src[i];
-			i++;
-			j++;
+			if (src[i] == 39 || src[i] == '"')
+				i++;
+			else
+				dst[j++] = src[i++];
 		}
 		dst[j] = '\0';
 	}
@@ -76,16 +81,21 @@ void	ft_strlcpy_whithout_plus(char *dst, char *src, int size)
 void	cpy_for_add_var(char *dst, char *src_add, char *src, int size)
 {
 	int	i;
-	int	index_from_src_add;
+	int	index_from_src;
 
 	i = 0;
-	index_from_src_add = until(src_add, '+') + 2;
+	index_from_src = until(src_add, '+') + 2;
 	while (src[i])
 	{
 		dst[i] = src[i];
 		i++;
 	}
-	while (src_add[index_from_src_add] && i < size)
-		dst[i++] = src_add[index_from_src_add++];
+	while (src_add[index_from_src] && i < size)
+	{
+		if (src_add[index_from_src] == 39 || src_add[index_from_src] == '"')
+			index_from_src++;
+		else
+			dst[i++] = src_add[index_from_src++];
+	}
 	dst[i] = '\0';
 }

@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:33:02 by salowie           #+#    #+#             */
-/*   Updated: 2023/11/17 10:34:55 by salowie          ###   ########.fr       */
+/*   Updated: 2023/12/28 10:00:53 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,42 +45,54 @@ int	is_equal_str(char *stack, char *needle)
 	return (0);
 }
 
-int	ft_strlen_double_tab(char **envp)
+static int	bef_equal(char *var)
 {
 	int	i;
+	int	res;
 
 	i = 0;
-	if (!envp)
-		return (0);
-	while (envp[i])
+	res = 0;
+	if (var[0] == '=')
+		res = 1;
+	while (var[i] && var[i] != '=')
+	{
+		if (var[0] && ft_isalpha(var[0]) == 0)
+			res = 1;
+		else if (!(var[i] == 39 || var[i] == '"' 
+				|| ft_isalnum(var[i]) == 1 || var[i] == '+'))
+			res = 1;
 		i++;
-	return (i);
+	}
+	return (res);
+}
+
+static int	after_equal(char *var, int i)
+{
+	int	quote;
+	int	res;
+
+	quote = 0;
+	res = 0;
+	while (var[i])
+	{
+		if (var[i] == 39 || var[i] == '"')
+			quote = 1;
+		else if (quote == 0 && var[i] == 32)
+			res = 1;
+		i++;
+	}
+	return (res);
 }
 
 int	is_special_caracter(char *var)
 {
 	int	i;
-	int	flag;
+	int	res;
 
-	i = 0;
-	flag = 0;
-	while (var[i])
-	{
-		if (ft_isalpha(var[0]) == 0)
-			return (1);
-		if (var[i] == '+' && var[i + 1] == '=')
-			i++;
-		if (var[i] == '=')
-			flag = 1;
-		while (flag == 1 && (var[i] == '+' || var[i] == '*' || var[i] == '-' 
-				|| var[i] == '/' || var[i] == '%' || var[i] == ',' 
-				|| var[i] == '.'))
-			i++;
-		if (!(var[i] >= 'A' && var[i] <= 'Z') 
-			&& !(var[i] >= 'a' && var[i] <= 'z') 
-			&& !(var[i] >= '0' && var[i] <= '9') && !(var[i] == '='))
-			return (1);
-		i++;
-	}
-	return (0);
+	res = bef_equal(var);
+	if (res == 1)
+		return (res);
+	i = until(var, '=');
+	res = after_equal(var, i);
+	return (res);
 }
