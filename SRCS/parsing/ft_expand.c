@@ -6,7 +6,7 @@
 /*   By: gvardaki <gvardaki@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 00:23:22 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/26 11:51:34 by gvardaki         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:15:33 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int	ft_expand_var_env(char **s, size_t i, char **env)
 		return (1);
 	}
 	tmp = ft_replace(*s, i, ft_var_len(&(*s)[i + 1]) + 1, var);
+	free(var);
 	free(*s);
 	*s = tmp;
 	if (!*s)

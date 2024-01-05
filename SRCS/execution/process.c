@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:02:59 by Sarah             #+#    #+#             */
-/*   Updated: 2023/12/28 15:57:02 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:33:57 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	ft_process(void)
 	ft_div_tab();
 	if (g_shell.pipex.pipe_nbr > 0)
 		wich_process(g_shell.elem_to_pipe);
-	else if (g_shell.pipex.pipe_nbr == 0 
+	else if (g_shell.pipex.pipe_nbr == 0
 		&& is_builtins(g_shell.elem_to_pipe->cmd) == 1)
 		no_pipe_builtins(g_shell.elem_to_pipe);
-	else if (g_shell.pipex.pipe_nbr == 0 
+	else if (g_shell.pipex.pipe_nbr == 0
 		&& is_builtins(g_shell.elem_to_pipe->cmd) == 0)
 		no_pipe(g_shell.elem_to_pipe);
 }
@@ -89,7 +89,7 @@ int	create_pipe(t_pipe *pipex, int nbr_pipe)
 	int	i;
 
 	i = 0;
-	pipex->fd = malloc(sizeof(int *) * nbr_pipe);
+	pipex->fd = malloc(sizeof(int *) * (nbr_pipe + 1));
 	if (!pipex->fd)
 	{
 		ft_free((void **)&pipex->fd);
@@ -109,5 +109,6 @@ int	create_pipe(t_pipe *pipex, int nbr_pipe)
 		}
 		i++;
 	}
+	pipex->fd[i] = NULL;
 	return (0);
 }

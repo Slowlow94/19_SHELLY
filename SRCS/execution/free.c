@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:34:12 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/26 14:32:36 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:04:43 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ void	ft_free_2d_int(int ***fd)
 	i = 0;
 	if (!pt_fd)
 		return ;
-	while (i < g_shell.pipex.pipe_nbr)
+	while (pt_fd[i] && i <= g_shell.pipex.pipe_nbr)
 	{
 		ft_free((void **)&pt_fd[i]);
 		i++;
 	}
+	free(*fd);
 	*fd = NULL;
 }
 
@@ -68,8 +69,6 @@ void	ft_free_struct(t_pipe *pipex)
 		ft_free_2d_char(&pipex->decomp_cmd);
 	if (pipex->decomp_path)
 		ft_free_2d_char(&pipex->decomp_path);
-	if (pipex->pipe_nbr > 0)
-		ft_free_2d_int(&pipex->fd);
 }
 
 void	ft_free_all(t_shell *shell)

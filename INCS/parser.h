@@ -6,7 +6,7 @@
 /*   By: gvardaki <gvardaki@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:20:41 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/28 13:04:01 by gvardaki         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:45:13 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	ft_tokenizer(char *cmd, char **env, int i);
 void	ft_error_list(t_list **lst, int err);
 
 // add_node
-int	ft_add_ope(char *cmd, int *i);
-int	ft_add_str(char *cmd, int *i);
-int	ft_add_str_var(char *cmd, int *i, char **env);
-int	ft_add_token(char *cmd, int *i, int j);
+int		ft_add_ope(char *cmd, int *i);
+int		ft_add_str(char *cmd, int *i);
+int		ft_add_str_var(char *cmd, int *i, char **env);
+int		ft_add_token(char *cmd, int *i, int j);
 
 // utils
 size_t	ft_strchr_len(char *s, int c);
@@ -43,11 +43,13 @@ char	ft_isvar_env(char *str);
 char	**ft_pipe_size(t_list *lst, int *size);
 int		ft_split_util(t_list **lst, char **ret);
 int		ft_split_cmds_value(char ***cmds, char ***cmds2);
+size_t	ft_shortest(char *s, char a, char b, char c);
+char	**ft_syntax_error(void);
 
 //analyzer
-int	ft_analyze(char **cmd);
-int	ft_check_file(char *path);
-int	ft_check_outfile(char *path);
+int		ft_analyze(char **cmd);
+int		ft_check_file(char *path);
+int		ft_check_outfile(char *path);
 
 //heredoc
 int		ft_add_heredoc(char *cmd, int *i);

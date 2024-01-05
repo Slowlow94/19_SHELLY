@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:50:51 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/27 10:55:41 by gvardaki         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:45:18 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,17 @@ char	**ft_parse(char *cmd_line, char **env)
 	{
 		add_history(cmd_line);
 		if (cmd_line[0] == '|' || cmd_line[ft_strlen(cmd_line) - 1] == '|')
-		{
-			ft_printf("minishell: syntax error near unexpected token `|'\n");
-			g_shell.status = 258;
-			return (NULL);
-		}
+			return (ft_syntax_error());
 		line = ft_expand(cmd_line, env);
 		ft_tokenizer(line, env, 0);
+		free(line);
 		if (ft_lstsize(g_shell.token_list) == 0)
 			return (NULL);
 		if (ft_split_cmds_value(&cmds, &cmds2))
 			return (NULL);
 	}
+	else
+		free(g_shell.cmd_line);
 	return (cmds2);
 }
 

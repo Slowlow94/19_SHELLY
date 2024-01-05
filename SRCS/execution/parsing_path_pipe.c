@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:34:01 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/28 14:38:06 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/03 10:58:08 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,10 @@ void	check_cmd(t_pipe pipex)
 		if (access(cmd, X_OK) == 0)
 		{
 			execve(cmd, pipex.decomp_cmd, g_shell.my_env);
+			perror(cmd);
 			free(cmd);
-			ft_error_free_and_close(&g_shell, "execve failed :");
+			g_shell.pipex.status = 2;
+			return ;
 		}
 		free(cmd);
 	}

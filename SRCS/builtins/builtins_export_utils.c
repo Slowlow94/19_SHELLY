@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:33:02 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/28 10:00:53 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:40:08 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ static int	bef_equal(char *var)
 		res = 1;
 	while (var[i] && var[i] != '=')
 	{
-		if (var[0] && ft_isalpha(var[0]) == 0)
+		if (var[0] && ft_isalpha(var[0]) == 0
+			&& (var[0] != '"' && var[0] != 39))
 			res = 1;
-		else if (!(var[i] == 39 || var[i] == '"' 
+		if (!(var[i] == 39 || var[i] == '"' 
 				|| ft_isalnum(var[i]) == 1 || var[i] == '+'))
 			res = 1;
 		i++;
@@ -89,6 +90,8 @@ int	is_special_caracter(char *var)
 	int	i;
 	int	res;
 
+	if (ft_strncmp(var, "\"\"", ft_strlen(var)) == 0)
+		return (1);
 	res = bef_equal(var);
 	if (res == 1)
 		return (res);

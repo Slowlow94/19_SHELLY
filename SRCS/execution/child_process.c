@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 09:47:10 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/27 13:01:41 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:33:54 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	child_process(t_pipe pipex, int i, t_lst *list)
 {
 	int	res_builtins;
 
+	ft_signal();
 	g_shell.child = true;
 	res_builtins = 0;
 	if (i == 0)
@@ -37,7 +38,7 @@ void	child_process(t_pipe pipex, int i, t_lst *list)
 		check_cmd(pipex);
 	}
 	else if (res_builtins == 1)
-		g_shell.status = 1; // modifier quand on aura regler les signaux
+		g_shell.pipex.status = 1;
 }
 
 static void	first_pipe(t_pipe pipex, int i, t_lst *list)

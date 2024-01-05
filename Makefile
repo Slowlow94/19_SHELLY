@@ -34,6 +34,8 @@ SRCS	= SRCS/builtins/exec_builtins.c \
 		SRCS/parsing/split_utils.c \
 		SRCS/parsing/expand_utils.c \
 		SRCS/parsing/ft_expand.c \
+		SRCS/parsing/ft_split_quote.c \
+		SRCS/parsing/error.c \
 		SRCS/signal/signal.c \
 		SRCS/execution/process.c \
 		SRCS/execution/child_process.c \
@@ -46,14 +48,13 @@ SRCS	= SRCS/builtins/exec_builtins.c \
 		SRCS/execution/no_pipe.c \
 		SRCS/execution/free.c \
 		SRCS/execution/free_exec.c \
+		SRCS/execution/ft_argv_cmd.c \
 		SRCS/main.c \
-		SRCS/utils.c \
-		SRCS/parsing/ft_split_quote.c \
-		SRCS/ft_argv_cmd.c
+		SRCS/utils.c
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
 

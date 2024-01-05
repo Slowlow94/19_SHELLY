@@ -6,7 +6,7 @@
 /*   By: gvardaki <gvardaki@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:34:10 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/28 14:08:01 by gvardaki         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:30:31 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	ft_add_heredoc(char *cmd, int *i)
 		++len;
 	len += ft_strlen(split[1]);
 	*i += len;
+	ft_free_2d(split);
+	g_shell.here_doc = true;
 	return (0);
 }
 
@@ -61,7 +63,7 @@ void	create_tmp_file(char *limiter, char *file)
 	if (tmp_fd == -1)
 	{
 		perror("Failed to create temp file");
-		return ;
+		exit (1);
 	}
 	line = readline(">");
 	while (line)
@@ -77,6 +79,7 @@ void	create_tmp_file(char *limiter, char *file)
 		line = readline(">");
 	}
 	close(tmp_fd);
+	exit(0);
 }
 
 char	**ft_check_delim(char *str, int	*err, int *i)

@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 15:29:43 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/28 11:10:51 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/03 10:00:46 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ static int	ft_process_quote(char const *s, int *i)
 {
 	char	quote;
 
-	quote = s[0];
+	quote = s[*i];
 	*i += 1;
 	while (s[*i] && s[*i] != quote)
+		*i += 1;
+	if (s[*i] == quote)
 		*i += 1;
 	return (0);
 }
@@ -40,7 +42,7 @@ static int	ft_split_size(char const *s, char c)
 			while (s[i] && s[i] != c)
 			{
 				if (s[i] == '\'' || s[i] == '\"')
-					ft_process_quote(&s[i], &i);
+					ft_process_quote(s, &i);
 				else
 					i++;
 			}
@@ -92,10 +94,12 @@ size_t	ft_sublen(const char *s)
 		{
 			c = s[i];
 			i++;
-			while (s[i] != c)
+			while (s[i] && s[i] != c)
 				i++;
-			if (s[i] == c)
+			if (s[i] && s[i] == c)
 				return (i + 1);
+			else
+				return (i);
 		}
 		i++;
 	}

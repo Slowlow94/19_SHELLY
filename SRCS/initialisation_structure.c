@@ -6,13 +6,13 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 10:11:49 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/27 13:05:58 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:55:55 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCS/minishell.h"
 
-static char *ft_incr_shlvl(char *str);
+static char	*ft_incr_shlvl(char *str);
 
 char	**create_my_envp(char **envp)
 {
@@ -30,7 +30,7 @@ char	**create_my_envp(char **envp)
 	{
 		if (ft_strncmp(envp[i], "SHLVL", 5) == 0)
 		{
-			my_envp[i] = ft_incr_shlvl(envp[i]); // proteger
+			my_envp[i] = ft_incr_shlvl(envp[i]);
 			i++;
 			continue ;
 		}
@@ -43,7 +43,7 @@ char	**create_my_envp(char **envp)
 	return (my_envp);
 }
 
-static char *ft_incr_shlvl(char *str)
+static char	*ft_incr_shlvl(char *str)
 {
 	char	*ret;
 	char	*tmp;

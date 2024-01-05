@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:48:42 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/26 11:40:21 by gvardaki         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:53:44 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_error_list(t_list **lst, int err)
 	if (err == 1)
 	{
 		perror("memory allocation failed");
-		ft_exit("3");
+		exit(3);
 	}
 }
 

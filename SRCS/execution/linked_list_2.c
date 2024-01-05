@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:34:15 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/27 17:01:29 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/03 10:44:40 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_lc_clear(t_lst **lst)
 			ft_free((void **)&temp->outfile);
 		if (temp->out_replace != NULL)
 			ft_free((void **)&temp->out_replace);
-		if (temp->cmd != NULL) // a ete rajoute
+		if (temp->cmd != NULL)
 			ft_free_2d_char(&temp->cmd);
 		*lst = (*lst)->next;
 		ft_free((void **)&temp);

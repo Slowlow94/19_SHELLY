@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.h                                          :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gvardaki <gvardaki@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 13:26:19 by gvardaki          #+#    #+#             */
-/*   Updated: 2024/01/04 15:06:14 by salowie          ###   ########.fr       */
+/*   Created: 2024/01/04 09:44:27 by gvardaki          #+#    #+#             */
+/*   Updated: 2024/01/04 09:53:19 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNALS_H
-# define SIGNALS_H
+#include "../../INCS/minishell.h"
 
-# include <stdio.h>
-
-void	ft_signal(void);
-void	ft_int_handler(int num);
-void	ft_quit_handler(int num);
-void	ft_sigint_hd(int num);
-void	ft_sigint_hdc(int num);
-#endif
+char	**ft_syntax_error(void)
+{
+	free(g_shell.cmd_line);
+	ft_printf("%s `|'\n", SYNTAX);
+	g_shell.status = 258;
+	return (NULL);
+}

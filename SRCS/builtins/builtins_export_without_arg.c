@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:05:07 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/19 16:57:24 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:58:39 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,12 @@ static int	is_in_newstr(char *str_envp, char **env_in_order)
 	return (0);
 }
 
-static char	*cpy_quote(char *str_env, int size)
+static char	*cpy_quote(char *str_env, int size, size_t i)
 {
-	size_t	i;
 	size_t	j;
 	int		flag;
 	char	*tmp;
 
-	i = 0;
 	j = 0;
 	flag = 0;
 	tmp = malloc(sizeof(char) * size);
@@ -47,11 +45,12 @@ static char	*cpy_quote(char *str_env, int size)
 			tmp[j++] = str_env[i++];
 			tmp[j++] = '"';
 		}
-		tmp[j++] = str_env[i++];
+		if (str_env[i] != '\0')
+			tmp[j++] = str_env[i++];
 	}
 	if (j > i)
-		tmp[j++] = '"';
-	tmp[j] = '\0';
+		tmp[j] = '"';
+	tmp[++j] = '\0';
 	return (tmp);
 }
 
@@ -114,9 +113,11 @@ int	export_without_cmd(int nbr_variables)
 	env_in_order = sorted_by_alpha(env_and_exported_values, nbr_variables);
 	if (!env_in_order)
 		return (1);
+	ft_free_2d_char(&env_and_exported_values);
 	while (env_in_order && env_in_order[i])
 	{
-		result = cpy_quote((env_in_order[i]), ft_strlen(env_in_order[i]) + 3);
+		result = cpy_quote((env_in_order[i]),
+				ft_strlen(env_in_order[i]) + 3, 0);
 		printf("declare -x ");
 		printf("%s\n", result);
 		ft_free((void **)&result);

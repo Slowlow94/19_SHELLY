@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 09:46:57 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/27 15:57:33 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:13:45 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	parent_process(t_pipe pipex, pid_t pid)
 	i = 0;
 	(void) pid;
 	close_all_pipe(&pipex);
+	if (pipex.pipe_nbr > 0)
+		ft_free_2d_int(&pipex.fd);
 	statuses = (int *)malloc(sizeof(int) * (pipex.pipe_nbr + 1));
 	if (!statuses)
 	{

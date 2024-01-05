@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 10:36:07 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/15 12:41:48 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/02 12:14:37 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	**replace_var_in_env(char *var)
 		{
 			size = ft_strlen(var);
 			free(g_shell.my_env[i]);
-			g_shell.my_env[i] = malloc (sizeof(char) * (size + 1));
+			g_shell.my_env[i] = malloc(sizeof(char) * (size + 1));
 			if (!g_shell.my_env[i])
 				return (free_envp_export(g_shell.my_env[i]));
 			ft_strlcpy_whithout_plus(g_shell.my_env[i], var, size + 1);

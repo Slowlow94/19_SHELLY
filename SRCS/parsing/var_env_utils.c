@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:49:07 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/26 12:03:05 by gvardaki         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:10:49 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_expand_var(char *str, char **env)
 		{
 			var = ft_substr(env[i], key_len + 1, ft_strlen(env[i]));
 			if (!var)
-				return (0);
+				var = NULL;
 			break ;
 		}
 	}

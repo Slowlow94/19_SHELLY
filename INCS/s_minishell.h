@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:14:36 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/28 16:03:26 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/04 13:17:47 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ typedef struct s_pipe
 	int		out;
 	int		pipe_nbr;
 	int		**fd;
-	int 	status;
-} 	t_pipe;
+	int		status;
+}	t_pipe;
 
 typedef struct s_lst
 {
-	char	**cmd;
-	char	*infile;
-	char	*outfile;
-	char	*out_replace;
+	char			**cmd;
+	char			*infile;
+	char			*outfile;
+	char			*out_replace;
 	struct s_lst	*next;
 }					t_lst;
 
@@ -55,7 +55,7 @@ void	ft_lc_add_back(t_lst **lst, t_lst *new);
 void	ft_lc_clear(t_lst **lst);
 
 // PIPE //
-void	ft_process();
+void	ft_process(void);
 void	init_pipe(t_pipe *pipex);
 void	is_creating_pipe_ok(void);
 int		create_pipe(t_pipe *pipex, int nbr_pipe);
@@ -82,7 +82,7 @@ void	free_rev_double_tab(t_pipe *pipex, int i);
 
 // INITIALISATION //
 char	**create_my_envp(char **envp);
-char 	**ft_argv_cmd(char **cmds);
+char	**ft_argv_cmd(char **cmds, int j);
 
 // BUILTINS //
 int		exec_builtins(char **argv);
@@ -93,7 +93,8 @@ int		ft_envp(char **argv, int i);
 int		ft_export(char **var, int i);
 int		ft_unset(char **var, int i, int res);
 int		ft_pwd(void);
-int		ft_exit(char *argv);
+void	add_pwd(void);
+int		ft_exit(char **argv, int i, int j);
 
 	// EXPORT UTILS //
 int		export_without_cmd(int nbr_var);
@@ -104,7 +105,7 @@ char	**add_to_var_in_env(char **envp, char *var);
 char	**replace_var_in_env(char *var);
 char	**add_new_to_env(char **envp, char *var, int nbr_var);
 char	**del_var_export(char **e, char *var);
-char 	**del_var_env(char **e, char *var);
+char	**del_var_env(char **e, char *var);
 char	**concat_double_tab(int nbr_var);
 char	*cpy_second_tab_in_tab(char *e);
 

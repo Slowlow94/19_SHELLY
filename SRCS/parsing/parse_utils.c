@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:35:01 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/26 10:14:05 by gvardaki         ###   ########.fr       */
+/*   Updated: 2024/01/02 13:58:55 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,20 @@ char	**ft_pipe_size(t_list *lst, int *size)
 	ret = malloc(sizeof (char *) * (*size + 1));
 	if (!ret)
 		return (NULL);
+	return (ret);
+}
+
+size_t	ft_shortest(char *s, char a, char b, char c)
+{
+	size_t	ret;
+
+	ret = 0;
+	if (!s)
+		return (0);
+	ret = ft_strchr_len(s, a);
+	if (ret > ft_strchr_len(s, b))
+		ret = ft_strchr_len(s, b);
+	if (ret > ft_strchr_len(s, c))
+		ret = ft_strchr_len(s, c);
 	return (ret);
 }

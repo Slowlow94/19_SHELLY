@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:02:53 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/28 16:05:01 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/02 13:50:23 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_add_to_linked_list(char *in, char *out, char *out_rep, char **cmds)
 {
 	t_lst	*new_node;
+
 	if (g_shell.elem_to_pipe == NULL)
 		g_shell.elem_to_pipe = ft_lc_new(in, out, out_rep, cmds);
 	else

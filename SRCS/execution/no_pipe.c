@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:23:30 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/27 12:54:33 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:04:02 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	no_pipe(t_lst *list)
 	}
 	else
 	{
-		close_all_pipe(&g_shell.pipex); // a ete rajoute pb echo
+		close_all_pipe(&g_shell.pipex);
 		waitpid(-1, &g_shell.pipex.status, 0);
 		status = WEXITSTATUS(g_shell.pipex.status);
 		g_shell.status = status;

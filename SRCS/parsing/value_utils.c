@@ -6,7 +6,7 @@
 /*   By: gvardaki <gvardaki@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:20:50 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/27 11:00:51 by gvardaki         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:17:00 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	ft_split_cmds_value(char ***cmds, char ***cmds2)
 	{
 		g_shell.status = ret;
 		ft_free_matrix(*cmds);
+		ft_free_matrix(*cmds2);
 		return (1);
 	}
 	ft_free_matrix(*cmds);

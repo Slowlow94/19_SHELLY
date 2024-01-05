@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:04:05 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/28 10:05:05 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:37:12 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	what_to_do_for_var(char *var, int nbr_var)
 	}
 	if (is_char(var, '=') == 1)
 	{
-		if (ft_is_equal(var, nbr_var) == 0)
+		if (ft_is_equal(var, nbr_var) == 1)
 			return (1);
 	}
 	else
@@ -85,7 +85,9 @@ static int	what_to_do_for_var(char *var, int nbr_var)
 int	ft_export(char **var, int i)
 {
 	int	nbr_variables;
+	int	res;
 
+	res = 0;
 	nbr_variables = ft_strlen_double_tab(g_shell.my_env);
 	if (var[i] == NULL)
 	{
@@ -97,14 +99,14 @@ int	ft_export(char **var, int i)
 		if (is_special_caracter(var[i]) == 0)
 		{
 			if (what_to_do_for_var(var[i], nbr_variables) == 1)
-				return (1);
+				res = 1;
 		}
 		else
 		{
 			printf(" export: '%s' : not a valid identifier\n", var[i]);
-			return (1);
+			res = 1;
 		}
 		i++;
 	}
-	return (0);
+	return (res);
 }

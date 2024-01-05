@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 09:30:57 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/28 17:17:30 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/04 13:21:06 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	ft_get_final_command(char **div, char ***fin)
 	{
 		if (!*fin)
 		{
-			*fin = ft_argv_cmd(&div[i]);
+			*fin = ft_argv_cmd(&div[i], 0);
 			if (!*fin)
 			{
 				ft_free_2d_char(&div);

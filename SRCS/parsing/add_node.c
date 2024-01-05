@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:25:29 by gvardaki          #+#    #+#             */
-/*   Updated: 2023/12/28 14:45:14 by gvardaki         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:54:47 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,16 @@ int	ft_add_str_var(char *cmd, int *i, char **env)
 	size_t	len;
 	char	*value;
 
-	*i += 1;
-	len = ft_strchr_len(&cmd[*i], 34);
-	if (ft_strchr(&cmd[*i], 34) != 0)
+	if (ft_strchr(&cmd[*i + 1], 34) != 0)
 	{
+		len = ft_strchr_len(&cmd[*i + 1], 34) + 2;
 		if (ft_strchr(&cmd[*i], '$'))
 			value = ft_build_value(&cmd[*i], env, len);
 		else
 			value = ft_substr(&cmd[*i], 0, len);
 		if (!value)
 			return (1);
-		*i += len + 1;
+		*i += len;
 		ft_lstadd_back(&g_shell.token_list, ft_lstnew(value));
 	}
 	else
@@ -92,7 +91,7 @@ int	ft_add_token(char *cmd, int *i, int j)
 	}
 	else
 	{
-		len = ft_strchr_len(&cmd[*i], 32);
+		len = ft_shortest(&cmd[*i], 32, 34, 39);
 		pipe_len = ft_strchr_len(&cmd[*i], '|');
 		if (pipe_len < len)
 			len = pipe_len;

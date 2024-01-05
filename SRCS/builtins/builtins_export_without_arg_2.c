@@ -6,7 +6,7 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:51:49 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/19 16:56:48 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/04 11:04:30 by salowie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	**add_var_to_export(char *var_to_add)
 		return (free_envp_export_new(new, "new"));
 	new[++i] = NULL;
 	ft_free_2d_char(&g_shell.export);
+	g_shell.export = NULL;
 	return (new);
 }
 

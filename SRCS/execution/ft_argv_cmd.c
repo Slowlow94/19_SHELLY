@@ -6,11 +6,11 @@
 /*   By: salowie <salowie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 11:53:21 by salowie           #+#    #+#             */
-/*   Updated: 2023/12/27 12:21:58 by salowie          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:49:24 by gvardaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCS/minishell.h"
+#include "../../INCS/minishell.h"
 
 static int	ft_cmd_size(char **cmds)
 {
@@ -32,11 +32,10 @@ static int	ft_cmd_size(char **cmds)
 	return (size);
 }
 
-char	**ft_argv_cmd(char **cmds)
+char	**ft_argv_cmd(char **cmds, int j)
 {
 	int		size;
 	int		k;
-	int		j;
 	char	**ret;
 
 	size = ft_cmd_size(cmds);
@@ -44,7 +43,6 @@ char	**ft_argv_cmd(char **cmds)
 	if (!ret)
 		return (NULL);
 	k = 0;
-	j = 0;
 	while (k < size)
 	{
 		if (cmds[k][0] == '<' || cmds[k][0] == '>')
